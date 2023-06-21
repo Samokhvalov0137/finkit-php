@@ -1,0 +1,36 @@
+<table>
+    <tr>
+        <th>Plot, number</th>
+        <th>Size, acres</th>
+        <th>Status</th>
+        <th>Billing</th>
+        <th>Price</th>
+        <th>Owners</th>
+        <th></th>
+    </tr>
+    {section name=i loop=$users}
+    <tr>
+        <td>{$users[i].phone}</td>
+        <td>{$users[i].email}</td>
+        <td{if $users[i].status == 0} class="green" {/if}>{$users[i].status_str}</td>
+        <td>{if $users[i].billing == 1}Yes{else}No{/if}</td>
+        <td>{$users[i].price} AED</td>
+        <td>
+            {if $users[i].users}
+            {section name=j loop=$users[i].users}
+            <div>{$users[i].users[j].first_name}, <span class="gray">{$users[i].users[j].phone_str}</span></div>
+            {/section}
+            {else}
+            -
+            {/if}
+        </td>
+        <td class="right_column">
+            <i class="icon icon_ellipsis" onclick="common.menu_popup_toggle(this, event);">
+                <div class="menu_popup">
+                    <div onclick="common.plot_edit_window({$users[i].id}, event);">Edit</div>
+                </div>
+            </i>
+        </td>
+    </tr>
+    {/section}
+</table>
